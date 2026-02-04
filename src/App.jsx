@@ -1,27 +1,26 @@
 import { useState } from "react";
 
-// LOGIN FORM COMPONENT
+// LOGIN FORM
 const LoginForm = ({ handleLogin, error }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // Submit Action — Event Handling
   const onSubmitForm = (e) => {
-    e.preventDefault(); // stops page refresh
+    e.preventDefault();
     handleLogin(username, password);
   };
 
   return (
-    <form onSubmit={onSubmitForm} className="card">
-      <h2>Login</h2>
+    <form onSubmit={onSubmitForm} className="card fade-in">
+      <h2>Project Gatekeeper</h2>
+      <p className="subtitle">Sign in to continue</p>
 
-      {/* User Input — Controlled Components */}
       <input
         type="text"
         placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        className={error ? "border-red" : "border-gray"}
+        className={`input ${error ? "border-red" : "border-gray"}`}
       />
 
       <input
@@ -29,34 +28,36 @@ const LoginForm = ({ handleLogin, error }) => {
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className={error ? "border-red" : "border-gray"}
+        className={`input ${error ? "border-red" : "border-gray"}`}
       />
 
-      <button type="submit">Login</button>
+      <button type="submit" className="btn">
+        Login
+      </button>
 
-      {/* Form Feedback — Conditional Rendering */}
       {error && <p className="error-text">Invalid username or password</p>}
     </form>
   );
 };
 
-// DASHBOARD COMPONENT
+// DASHBOARD
 const Dashboard = ({ user }) => {
   return (
-    <div className="card">
+    <div className="card fade-in">
       <h2>{`Welcome, ${user}!`}</h2>
-      <p>You have successfully logged in.</p>
+      <p>You are now logged in.</p>
+      <div className="stats">
+        <div className="stat-box">Hello, you have messages: 5</div>
+      </div>
     </div>
   );
 };
 
-// MAIN APP COMPONENT
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
 
-  // Auth Check — Conditional Logic
   const handleLogin = (username, password) => {
     if (username === "admin" && password === "1234") {
       setIsLoggedIn(true);
@@ -68,14 +69,13 @@ function App() {
   };
 
   return (
-    <>
-      {/* Conditional Rendering */}
+    <div className="app-container">
       {isLoggedIn ? (
         <Dashboard user={currentUser} />
       ) : (
         <LoginForm handleLogin={handleLogin} error={error} />
       )}
-    </>
+    </div>
   );
 }
 
