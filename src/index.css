@@ -1,0 +1,20 @@
+.border-red {
+  border: 1px solid red;
+}
+
+.border-gray {
+  border: 1px solid gray;
+}
+
+.error-text {
+  color: red;
+}
+
+.card {
+  width: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  text-align: center;
+}
